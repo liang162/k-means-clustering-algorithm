@@ -42,7 +42,12 @@ for i in range(0, 19):
         result.append(temp)
         temp = []
 
-#generate a random list
-for i in range(0, int (numOfClusters)):
+#generate a random list, initial centroid
+for i in range(0, int(numOfClusters)):
     random_list.append(int(random.random() * 21090))
+
+for i in range(0, int(numOfClusters)):
+    print "Centroid" + str(i + 1) + "=[" + str(result[0][random_list[i]]) + "," + str(result[1][random_list[i]]) + "," + str(result[2][random_list[i]]) + "," + str(result[3][random_list[i]]) + "]"
+
+
 
