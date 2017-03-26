@@ -59,7 +59,7 @@ for i in range(0, int(numOfClusters)):
 for i in range(0, int(numOfClusters)):
     temp_centroid_list = []
     for j in range(0, 4):
-        temp_centroid_list.append(result[j][centroid_list[i]])
+        temp_centroid_list.append(float(result[j][centroid_list[i]]))
     centroid_list[i] = temp_centroid_list
     temp_centroid_list = []
 
@@ -72,22 +72,32 @@ while True:
         index_of_min = distance_list.index(min(distance_list))
         cluster_list[index_of_min].append(i)
         distance_list = []
+
     #reassign centroid, if centroid does NOT change, then change = 0, break
     old_centroid_list = centroid_list
     #get the new centroid list, method: look for the shortest distance sum
     new_centroid_list = []
     for k in range(0, int(numOfClusters)):
+        temp_new_centroid_list = []
         for l in range(0, 4):
-            
-
-    if(old_centroid_list == new_centroid_list):
-        change = 0
+            total = 0.0
+            average = 0.0
+            for m in range(0, len(cluster_list[k])):
+                total = total + float(result[l][cluster_list[k][m]])
+            if(len(cluster_list[k]) == 0):
+                average = 0
+            else:
+                average = total / len(cluster_list[k])
+            temp_new_centroid_list.append(average)
+        new_centroid_list.append(temp_new_centroid_list)
+        temp_new_centroid_list = []
+    if(abs(float(old_centroid_list[0][0]) - float(new_centroid_list[0][0])) <= 0.000000001):
+        print "change = 0, break"
+        break
     else:
         centroid_list = new_centroid_list
+        print "centroid_list != new_centroid_list"
 
-    if(change == 0):
-        break
-
-# for i in range(0, int(numOfClusters)):
-#     print "Centroid" + str(i + 1) + "=[" + str(centroid_list[i][0]) + "," + str(centroid_list[i][1]) + "," + str(centroid_list[i][2]) + "," + str(centroid_list[i][3]) + "]"
+for i in range(0, int(numOfClusters)):
+    print "Centroid" + str(i + 1) + "=[" + str(centroid_list[i][0]) + "," + str(centroid_list[i][1]) + "," + str(centroid_list[i][2]) + "," + str(centroid_list[i][3]) + "]"
 
