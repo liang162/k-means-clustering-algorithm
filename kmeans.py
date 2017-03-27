@@ -65,16 +65,22 @@ for i in range(0, int(numOfClusters)):
 
 change = 1
 distance_list = []
+temp_storage_of_cluster_list = [-1] * (len(data) - 1)
+#need to rerun
+need_to_rerun = 0
+
 while True:
+    need_to_rerun = 0
     for i in range(0, len(data) - 1):
         for j in range(0, int(numOfClusters)):
             distance_list.append(math.sqrt((float(result[0][i]) - float(centroid_list[j][0]))**2 + (float(result[1][i]) - float(centroid_list[j][1]))**2 + (float(result[2][i]) - float(centroid_list[j][2]))**2 + (float(result[3][i]) - float(centroid_list[j][3]))**2))
         index_of_min = distance_list.index(min(distance_list))
+        if(temp_storage_of_cluster_list[i] != index_of_min):
+            need_to_rerun = 1
+        temp_storage_of_cluster_list[i] = index_of_min
         cluster_list[index_of_min].append(i)
         distance_list = []
 
-    #reassign centroid, if centroid does NOT change, then change = 0, break
-    old_centroid_list = centroid_list
     #get the new centroid list, method: look for the shortest distance sum
     new_centroid_list = []
     for k in range(0, int(numOfClusters)):
@@ -91,12 +97,8 @@ while True:
             temp_new_centroid_list.append(average)
         new_centroid_list.append(temp_new_centroid_list)
         temp_new_centroid_list = []
-    if(abs(float(old_centroid_list[0][0]) - float(new_centroid_list[0][0])) <= 0.000000001):
-        print "change = 0, break"
+    if(need_to_rerun == 0):
         break
-    else:
-        centroid_list = new_centroid_list
-        print "centroid_list != new_centroid_list"
 
 for i in range(0, int(numOfClusters)):
     print "Centroid" + str(i + 1) + "=[" + str(centroid_list[i][0]) + "," + str(centroid_list[i][1]) + "," + str(centroid_list[i][2]) + "," + str(centroid_list[i][3]) + "]"
