@@ -63,8 +63,6 @@ for i in range(0, int(numOfClusters)):
     centroid_list[i] = temp_centroid_list
     temp_centroid_list = []
 
-print centroid_list
-
 change = 1
 distance_list = []
 temp_storage_of_cluster_list = [-1] * (len(data) - 1)
