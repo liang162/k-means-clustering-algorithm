@@ -63,6 +63,8 @@ for i in range(0, int(numOfClusters)):
     centroid_list[i] = temp_centroid_list
     temp_centroid_list = []
 
+print centroid_list
+
 change = 1
 distance_list = []
 temp_storage_of_cluster_list = [-1] * (len(data) - 1)
@@ -75,8 +77,10 @@ while True:
         for j in range(0, int(numOfClusters)):
             distance_list.append(math.sqrt((float(result[0][i]) - float(centroid_list[j][0]))**2 + (float(result[1][i]) - float(centroid_list[j][1]))**2 + (float(result[2][i]) - float(centroid_list[j][2]))**2 + (float(result[3][i]) - float(centroid_list[j][3]))**2))
         index_of_min = distance_list.index(min(distance_list))
+
         if(temp_storage_of_cluster_list[i] != index_of_min):
-            need_to_rerun = 1
+            need_to_rerun = need_to_rerun + 1
+        #assign cluster to list
         temp_storage_of_cluster_list[i] = index_of_min
         cluster_list[index_of_min].append(i)
         distance_list = []
@@ -97,7 +101,9 @@ while True:
             temp_new_centroid_list.append(average)
         new_centroid_list.append(temp_new_centroid_list)
         temp_new_centroid_list = []
-    if(need_to_rerun == 0):
+    centroid_list = new_centroid_list
+    
+    if(need_to_rerun < 0.001 * len(data) - 1):
         break
 
 for i in range(0, int(numOfClusters)):
