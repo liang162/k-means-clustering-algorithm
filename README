@@ -1,0 +1,11 @@
+Name:
+Yinrong Liang
+
+Instructions:
+python kmeans.py yelp3.csv K clusteringOption plotOption
+K: 3, 6, 9, 12, 24, 48
+clusteringOption: 1, 2, 3, 4, 5
+plotOption: no, 1, 2
+
+Errors:
+When you running using cluster option 5, there might be error indicating you cannot convert a string into an int or index out of range. Just rerun the code using the same command, and it will work. The error is caused by the first row of the original dataset containing the header.
