@@ -1,6 +1,3 @@
-Name:
-Yinrong Liang
-
 Instructions:
 python kmeans.py yelp3.csv K clusteringOption plotOption
 K: 3, 6, 9, 12, 24, 48
